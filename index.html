@@ -14,33 +14,48 @@
     <link rel="icon" href="./favicon.png" />
     <link rel="manifest" href="./manifest.json" />
     <meta name="theme-color" content="#7A1B1B" />
-    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
     <style id="expo-reset">
-      /* These styles make the body full-height */
-      html,
-      body {
-        height: 100%;
-      }
-      /* These styles disable body scrolling if you are using <ScrollView> */
-      body {
-        overflow: hidden;
-      }
-      /* These styles make the root element full-height */
-      #root {
-        display: flex;
-        height: 100%;
-        flex: 1;
-      }
+      html, body { height: 100%; }
+      body { overflow: hidden; }
+      #root { display: flex; height: 100%; flex: 1; }
     </style>
   </head>
 
   <body>
-    <!-- Use static rendering with Expo Router to support running without JavaScript. -->
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <!-- The root element for your Expo app. -->
     <div id="root"></div>
+
+    <!-- 累計訪問者カウンター -->
+    <div id="visitor-counter" style="
+      position: fixed;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #5C1414;
+      border: 1px solid #D4AF37;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      font-size: 12px;
+      color: #F2D48A;
+      z-index: 9999;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    ">
+      累計訪問者：<span id="visitor-count">-</span> 人
+    </div>
+    <script>
+      fetch('https://countapi.mileshilliard.com/api/v1/hit/omikuji-roulette-idobon99-visits')
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          var num = parseInt(data.value, 10);
+          document.getElementById('visitor-count').textContent = isNaN(num) ? '?' : num.toLocaleString('ja-JP');
+        })
+        .catch(function () {
+          document.getElementById('visitor-count').textContent = '?';
+        });
+    </script>
   <script src="./_expo/static/js/web/AppEntry-c47c7ed293f5d974d756ca8b1de48d57.js" defer></script>
 </body>
 </html>
