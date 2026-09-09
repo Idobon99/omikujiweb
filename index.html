@@ -46,8 +46,8 @@
       累計訪問者：<span id="visitor-count">-</span> 人
     </div>
     <script>
-      fetch('https://countapi.mileshilliard.com/api/v1/hit/omikuji-roulette-idobon99-visits')
-        .then(function (res) { return res.json(); })
+      fetch('https://abacus.jasoncameron.dev/hit/idobon99-omikujiweb/visits')
+             .then(function (res) { return res.json(); })
         .then(function (data) {
           var num = parseInt(data.value, 10);
           document.getElementById('visitor-count').textContent = isNaN(num) ? '?' : num.toLocaleString('ja-JP');
